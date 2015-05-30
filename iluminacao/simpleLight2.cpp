@@ -21,7 +21,7 @@
 
 GLuint programID;
 GLuint matrixID;        //
-GLuint modelID;
+GLuint modelID; // passa ao fragment shader para fazer o modelo de iluminação funcionar de maneira correta
 
 GLuint vertexID;
 GLuint vertexBuffer;
@@ -38,7 +38,7 @@ bool keystates[256];
 
 struct Light {
     glm::vec3 position;
-    glm::vec3 intensities; //a.k.a. the color of the light
+    glm::vec3 intensities; //a.k.a. the color of the light -> MATERIAL (RGB)
 };
 
 Light gLight;
@@ -57,7 +57,9 @@ int init_resources() {
 	glEnable(GL_DEPTH_TEST);
 
     glActiveTexture(GL_TEXTURE0);
-    textureID1 = loadtga("Bombermap.tga");
+    // lodtga é caseiro: texture.cpp . Carrega no formato tga.
+    // Também há bitmap
+    textureID1 = loadtga("Bombermap.tga"); //textura no formato de imagem
 
     gLight.position = vec3(0.0f, 10.0f, -10.0f);
     gLight.intensities = vec3(1.0f, 1.0f, 1.0f);
@@ -67,6 +69,7 @@ int init_resources() {
     glUseProgram(programID);
 
     matrixID = glGetUniformLocation(programID, "MVP");
+    // retorna -1 caso dê erro (não encontra o identificador model no vertex/fragment shader
     modelID = glGetUniformLocation(programID, "model");
 
 
@@ -88,20 +91,20 @@ int init_resources() {
     GLfloat vertexData[tamanho];
 
     for (int i = 0; i < vertices.size(); i++) {
-
+        // x y z
         vertexData[i*8] = vertices[i][0];
         vertexData[(i*8)+1] = vertices[i][1];
         vertexData[(i*8)+2] = vertices[i][2];
-
+        // mapeamento textura
         vertexData[(i*8)+3] = uvs[i][0];
         vertexData[(i*8)+4] = uvs[i][1];
-
+        // normal x y z
         vertexData[(i*8)+5] = normals[i][0];
         vertexData[(i*8)+6] = normals[i][1];
         vertexData[(i*8)+7] = normals[i][2];
-
     }
 
+    //passa toda a informação dos vertices de uma vez só através de um grande array
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertexData), vertexData, GL_STATIC_DRAW);
 
     // connect the xyz to the "vert" attribute of the vertex shader
@@ -217,7 +220,9 @@ void onDisplay() {
 
     Model *= rot * rot2;        //agora nossa model não é mais 1.0f
 
-	glm::mat4 MVP        = Projection * View * Model ;
+	glm::mat4 MVP        = Projection * View * Model ; //se fizer as rotações em Model aqui
+	// a iluminação não vai ser calculada corretamente, pois a matriz Model é passada ao shader
+	// e a informação das rotações não é guardada quando enviada ao shader
 
 
     /**passa os parametros para a glsl***************************************************************************/
