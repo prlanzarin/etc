@@ -5,8 +5,11 @@ uniform mat4 model;
 
 uniform vec3 light_position;
 uniform vec3 light_intensities;
+// coeficiente de iluminacao ambiente
 uniform float light_ambient_coefficient;
+// BRILHO ESPECULAR
 uniform float material_shininess;
+// COR DA LUZ ESPECULAR (MATERIAL)
 uniform vec3 COR_ESPECULAR_MAT;
 
 in vec2 fragTexCoord;
@@ -46,11 +49,13 @@ void main() {
     float CEF = dot(normal, VETOR_REFLEXAO) / (length(surfaceToLight) * length(normal));
     CEF = clamp(CEF, 0, 1);
     float COEFICIENTE_ESPECULAR = 0.0;
+    // se componente difusa é 0 (a parte do objeto que não está iluminada)
+    // componente especular também vai ser 0 (evita comportamentos estranhos)
+    // para partes não iluminadas
     if(brightness > 0.0)
         COEFICIENTE_ESPECULAR = pow(CEF, material_shininess);
 
     vec3 ESPECULAR = COEFICIENTE_ESPECULAR * COR_ESPECULAR_MAT * light_intensities;
 
-	//finalColor = vec4(brightness * light_intensities * surfaceColor.rgb, surfaceColor.a);
 	finalColor = vec4(AMBIENTE + ESPECULAR + DIFUSA, surfaceColor.a);
 }

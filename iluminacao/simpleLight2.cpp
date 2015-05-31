@@ -230,7 +230,7 @@ void idle() {
         else if (brilhosidade < 0.0)
             brilhosidade = 0.0;
 
-    printf("BRILHOSIDADE: %f | AMBIENTE: %f\n", brilhosidade, gLight.coeficiente_ambiente);
+    printf("BRILHOSIDADE (N+, M-): %f | AMBIENTE (C+, V-): %f\n", brilhosidade, gLight.coeficiente_ambiente);
 
 }
 
