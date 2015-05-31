@@ -46,7 +46,7 @@ Light gLight;
 
 int tamanho;
 
-GLfloat brilhosidade = 1.0f;
+GLfloat brilhosidade = 50.0f;
 
 int init_resources() {
 
@@ -284,9 +284,7 @@ void onDisplay() {
     // INTENSIDADE da iluminacao ESPECULAR
     glUniform1f(glGetUniformLocation(programID, "material_shininess"),
                 brilhosidade);
-    //POSIÇÃO DA CÂMERA
-    glUniform3fv(glGetUniformLocation(programID, "CAMERA_POSITION"),
-                  1, glm::value_ptr(glm::vec3(0,3, -3)));
+
 
 
     /**************************************************************************************************************/

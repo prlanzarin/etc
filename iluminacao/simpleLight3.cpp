@@ -62,7 +62,7 @@ struct Light {
     float coeficiente_ambiente;
 };
 
-GLfloat brilhosidade = 1.0;
+GLfloat brilhosidade = 50.0;
 
 Light gLight;
 
@@ -253,9 +253,6 @@ void onDisplay() {
     // INTENSIDADE da iluminacao ESPECULAR
     glUniform1f(glGetUniformLocation(programID, "material_shininess"),
                 brilhosidade);
-    //POSIÇÃO DA CÂMERA
-    glUniform3fv(glGetUniformLocation(programID, "CAMERA_POSITION"),
-                  1, glm::value_ptr(glm::vec3(10,10, 10)));
 
     /**************************************************************************************************************/
 
