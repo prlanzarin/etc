@@ -59,7 +59,10 @@ void loadTexture(unsigned int width, unsigned int height, const unsigned char * 
 struct Light {
     glm::vec3 position;
     glm::vec3 intensities; //a.k.a. the color of the light
+    float coeficiente_ambiente;
 };
+
+GLfloat brilhosidade = 1.0;
 
 Light gLight;
 
@@ -83,6 +86,7 @@ int init_resources() {
 
     gLight.position = vec3(0.0f, 10.0f, -10.0f);
     gLight.intensities = vec3(1.0f, 1.0f, 1.0f);
+    gLight.coeficiente_ambiente = 0.005f;
 
 
     programID = LoadShaders( "vertex-shader.txt", "fragment-shader.txt" );
@@ -178,9 +182,26 @@ void idle() {
     if (keystates['x'] == true)
         gLight.position[2] -= 0.25f;
 
+    if (keystates['c'] == true)
+        if (gLight.coeficiente_ambiente < 1.0f)
+            gLight.coeficiente_ambiente = gLight.coeficiente_ambiente + 0.01f;
 
+    if (keystates['v'] == true)
+        if (gLight.coeficiente_ambiente > 0.0f)
+            gLight.coeficiente_ambiente = gLight.coeficiente_ambiente - 0.01f;
+        else if (gLight.coeficiente_ambiente < 0.0)
+            gLight.coeficiente_ambiente = 0.0;
 
-    printf("Light position: (%f, %f, %f)\n", gLight.position[0], gLight.position[1], gLight.position[2] );
+    if (keystates['n'] == true)
+            brilhosidade = brilhosidade + 0.05;
+
+    if (keystates['m'] == true)
+        if (brilhosidade > 0.0)
+            brilhosidade = brilhosidade - 0.05;
+        else if (brilhosidade < 0.0)
+            brilhosidade = 0.0;
+
+    printf("BRILHOSIDADE: %f | AMBIENTE: %f\n", brilhosidade, gLight.coeficiente_ambiente);
 
 }
 
@@ -196,11 +217,8 @@ void onDisplay() {
     glm::mat4 Projection = glm::perspective(60.0f, 16.0f / 9.0f, 0.1f, 100.0f);
 
     glm::mat4 View       = glm::lookAt(
-
 								glm::vec3(10,10, 10),
 								glm::vec3(0,1, 0),
-
-
 								glm::vec3(0,1,0)
 						   );
 
@@ -225,6 +243,19 @@ void onDisplay() {
     //iluminacao
     glUniform3fv(glGetUniformLocation(programID, "light_position"), 1, glm::value_ptr(gLight.position));
     glUniform3fv(glGetUniformLocation(programID, "light_intensities"), 1, glm::value_ptr(gLight.intensities));
+
+    //envio do coeficiente ambiente
+    glUniform1f(glGetUniformLocation(programID, "light_ambient_coefficient"),
+                gLight.coeficiente_ambiente);
+    //envio da cor especular: escolhi por enviar a cor BRANCA
+    glUniform3fv(glGetUniformLocation(programID, "COR_ESPECULAR_MAT"),
+                  1, glm::value_ptr(glm::vec3(1.0f, 1.0f, 1.0f)));
+    // INTENSIDADE da iluminacao ESPECULAR
+    glUniform1f(glGetUniformLocation(programID, "material_shininess"),
+                brilhosidade);
+    //POSIÇÃO DA CÂMERA
+    glUniform3fv(glGetUniformLocation(programID, "CAMERA_POSITION"),
+                  1, glm::value_ptr(glm::vec3(10,10, 10)));
 
     /**************************************************************************************************************/
 
