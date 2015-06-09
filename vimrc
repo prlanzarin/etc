@@ -109,3 +109,6 @@ set softtabstop=8
 " TABs expanded to spaces
 set expandtab
 
+" Line numbers
+set number
+
