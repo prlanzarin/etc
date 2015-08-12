@@ -1,4 +1,3 @@
-# FCG
+# ETC
 
-Repositório para laboratórios e atividades da cadeira Fundamentos
-de Computação Gráfica.
+Config files and everything else
