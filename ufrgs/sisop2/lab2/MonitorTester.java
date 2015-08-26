@@ -4,16 +4,18 @@ class MyMonitor {
 	
 	private int data = 0;
 	private int turn = 1;
-    
-	public void update(int id) throws InterruptedException {
-		
-        /* fix me */
-		
+   	// synchronize garante que metodo eh mutualmente exclusiv
+	// threads ainda intercalam. Como arrumar? Variavel turn. 
+	public synchronized void update(int id) throws InterruptedException {
+
+	// wait & notify somente em bloco sincronizados	
+        while(turn != id) // se a vez nao for da thread, bloqueia. 
+		this.wait(); // eh while porque eh signal-and-continue
         System.out.println("Thread ID = " + id + " vai atualizar ...");
         data++; Thread.currentThread().sleep(new Random().nextInt(3000));
         System.out.println("Thread ID = " + id + " atualizou...");		
-		
-        /* fix me */    
+        turn = (turn + 1) % 2;	
+        this.notify();	
 	}
 }
 

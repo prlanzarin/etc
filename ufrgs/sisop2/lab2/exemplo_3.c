@@ -51,7 +51,9 @@ int buffer[MAX_ITEMS];
 
      pthread_create(&prod, NULL, (void *)produtor, NULL);
      pthread_create(&cons, NULL, (void *)consumidor, NULL);
-
-     pthread_exit(0);
+     
+     pthread_join(prod, NULL);
+     pthread_join(cons, NULL);
+     return 0;
  }
 
