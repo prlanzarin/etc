@@ -1,3 +1,3 @@
 # ETC
 
-Config files and everything else
+Config files, schoolwork etc.
