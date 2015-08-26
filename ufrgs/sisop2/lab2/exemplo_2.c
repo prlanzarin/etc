@@ -11,14 +11,12 @@ void *minha_funcao (void *arg) {
 
    while(TRUE) {
       
-	  /* fix me */
-	   
+      pthread_mutex_lock(&m);	   
       printf("Thread %d iniciando a SC\n ", n);
       printf("Thread %d ainda na SC\n ", n);
-	  sleep(rand()%5); 
-	  printf("Thread %d saindo da SC\n ", n);
-
-	  /* fix me */
+      sleep(rand()%5); 
+      printf("Thread %d saindo da SC\n ", n);
+      pthread_mutex_unlock(&m);
 	   
 	  sleep(rand()%5); 
    }
