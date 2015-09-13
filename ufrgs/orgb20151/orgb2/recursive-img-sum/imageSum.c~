@@ -1,0 +1,55 @@
+#define MAX_THREADS 4
+#define SIZE 1680 
+
+//#include <pthread.h>
+#include <stdlib.h>
+
+typedef struct {
+	char* img1;
+	char* img2;
+	char* imgRes;
+	int linhaInicio;
+	int colunaInicio;
+	int linhas;
+	int colunas;
+	int largura;
+} mediaMatrizParam;
+
+void *mediaMatriz(void *arg, int set) {
+	mediaMatrizParam* p = (mediaMatrizParam*)arg;
+	int linhaInicio = p->linhaInicio;
+	int colunaInicio = p->colunaInicio;
+	char* img1 = p->img1;
+	char* img2 = p->img2;
+	char* imgRes = p->imgRes;
+	int largura = p->largura;
+	int i,j;
+	if(set > 0)
+		mediaMatriz(p, (set-1));
+	for(i = (SIZE / 4) * set ; i < (p->linhas / 4); i++) {
+		for(j = (SIZE / 4) * set; j < (p->colunas / 4); ++j) {
+			(imgRes)[(linhaInicio+i)*largura + colunaInicio+j] = ((img1)[(linhaInicio+i)*largura + colunaInicio+j] + (img2)[(linhaInicio+i)*largura + colunaInicio+j])/2;
+		}
+	}
+}
+
+int main() {
+	char img1[SIZE][SIZE], img2[SIZE][SIZE], img3[SIZE][SIZE];
+
+	int i;
+
+	/* Run */
+		mediaMatrizParam* par = (mediaMatrizParam*)malloc(sizeof(mediaMatrizParam));
+		par->img1 = (char*)img1;
+		par->img2 = (char*)img2;
+		par->imgRes = (char*)img3;
+		par->linhaInicio = 0;
+		par->colunaInicio = 0;
+		par->linhas = SIZE;
+		par->colunas = SIZE;
+		par->largura = SIZE;
+		mediaMatriz(par, 3);
+
+	return 0;
+
+}

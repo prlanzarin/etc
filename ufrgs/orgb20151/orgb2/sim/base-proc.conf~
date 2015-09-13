@@ -1,0 +1,7 @@
+[ General ]
+Cores = 2
+Threads = 1
+Frequency = 2000
+
+[ BranchPredictor ]
+Kind = Perfect
