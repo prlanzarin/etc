@@ -3,7 +3,9 @@
 
 ## pkg-backup
 
-dpkg --get-selections > ~/Package.list
-sudo cp -R /etc/apt/sources.list* ~/
-sudo apt-key exportall > ~/Repo.keys
-rsync --progress /home/`whoami` /path/to/user/profile/backup/here
+H_DIR='/home/prlanzarin/backup'
+
+dpkg --get-selections > $H_DIR/Package.list
+sudo cp -R /etc/apt/sources.list* $H_DIR/
+sudo apt-key exportall > $H_DIR/Repo.keys
+rsync --progress /home/`whoami` $H_DIR/

@@ -3,7 +3,9 @@
 
 ## sys-restore
 
-rsync --progress /path/to/user/profile/backup/here /home/`whoami`
+H_DIR='/home/prlanzarin/backup'
+
+rsync --progress $H_DIR /home/`whoami`
 sudo apt-key add ~/Repo.keys
 sudo cp -R ~/sources.list* /etc/apt/
 sudo apt-get update
