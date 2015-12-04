@@ -1,0 +1,34 @@
+MAIN MODULES
+-> ndn::L3Protocol: implementation of the core NDN
+protocol interactions: receiving Interest and Data
+packets from upper and lower layers through Faces;
+
+-> ndn::Face: abstraction to enable uniform communications
+with applications (ndn::AppFace) and other
+simulated nodes (ndn::NetDeviceFace) with pluggable
+(and optional) support of link-level congestion
+mitigation modules;
+
+-> ndn::ContentStore: abstraction for in-network storage
+(e.g., short-term transient, long-term transient,
+long-term permanent) for Data packets;
+
+-> ndn::Pit: abstraction for the pending Interest table
+(PIT) that keeps track (per-prefix) of Faces on which
+Interests were received, Faces to which Interests
+were forwarded, as well as previously seen Interest
+nonces;
+
+-> ndn::Fib: abstraction for the forwarding information
+base (FIB), which can be used to guide Interest
+forwarding by the forwarding strategy;
+
+-> ndn::ForwardingStrategy: abstraction and
+core implementation for Interest and Data
+forwarding. Each step of the forwarding process
+in ndn::ForwardingStrategy including lookups
+to ContentStore, PIT, FIB, and forwarding Data
+packets according to PIT entries is represented
+as virtual function calls, which can be overridden
+in particular forwarding strategy implementation
+classes (see Section 2.7);
