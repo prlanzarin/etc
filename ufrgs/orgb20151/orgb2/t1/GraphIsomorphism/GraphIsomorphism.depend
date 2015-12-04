@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1385396965 source:c:\users\paulo\desktop\ufrgs\2013-2\teoria dos grafos e análise combinatória\t1\graphisomorphism\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+

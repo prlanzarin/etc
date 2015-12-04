@@ -103,13 +103,13 @@
         endif
 
         " TAB width = 8
-        set tabstop=8
+        set tabstop=4
 
         " indent size = 8
-        set shiftwidth=8
+        set shiftwidth=4
 
         " number of TAB columns
-        set softtabstop=8
+        set softtabstop=4
 
         " TABs expanded to spaces
         set expandtab

@@ -1,0 +1,13 @@
+
+; Multi2Sim 4.2 - A Simulation Framework for CPU-GPU Heterogeneous Computing
+; Please use command 'm2s --help' for a list of command-line options.
+; Simulation alpha-numeric ID: 3LJg0
+
+warning: ../base-mem-config.conf: section [Entry core-1] ignored, referring to x86 Core 1, Thread 1.
+	This section refers to a core or thread that does not currently exists.
+	Please review your x86 configuration file if this behavior is not desired.
+
+fatal: ../base-mem-config.conf: x86 Core 1, Thread 0 lacks a data/instruction entry to memory.
+	Please add a new [Entry <name>] section in your memory configuration
+	file to associate this hardware thread with a memory module.
+
