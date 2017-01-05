@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/var/lib/lxc/bbb-sip-beta/rootfs/home/prlanzarin/dev/freeswitch/src/mod'
+let g:netrw_dirhist_2='/var/lib/lxc/bbb-sip-beta/rootfs/home/prlanzarin/dev/freeswitch/src/mod/applications'
+let g:netrw_dirhist_3='/var/lib/lxc/bbb-sip-beta/rootfs/home/prlanzarin/dev/freeswitch/src/mod/applications/mod_conference'
+let g:netrw_dirhist_4='/var/lib/lxc/bbb-sip-beta/rootfs/home/prlanzarin/dev/freeswitch/src/mod'
+let g:netrw_dirhist_5='/var/lib/lxc/bbb-sip-beta/rootfs/home/prlanzarin/dev/freeswitch/src/mod/applications'
+let g:netrw_dirhist_6='/var/lib/lxc/bbb-sip-beta/rootfs/home/prlanzarin/dev/freeswitch/src/mod/applications/mod_conference'
