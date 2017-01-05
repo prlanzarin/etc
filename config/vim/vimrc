@@ -63,9 +63,12 @@ if has("autocmd")
     " For all text files set 'textwidth' to 78 characters.
     autocmd FileType text setlocal textwidth=80
     " C LANGUAGE 
-    autocmd FileType c setlocal ts=8 sw=8 noexpandtab
+    autocmd FileType c setlocal ts=2 sw=2 expandtab
     autocmd FileType c setlocal textwidth=80
-    autocmd FileType h setlocal ts=8 sw=8 noexpandtab
+    autocmd FileType h setlocal ts=2 sw=2 expandtab
+
+    " Javascript
+    autocmd FileType js setlocal ts=2 sw=2 textwidth=80 expandtab
 
     " NERDTree
     autocmd BufWinEnter * NERDTreeMirror
@@ -115,3 +118,7 @@ set number
 " Trailing spaces highlighting
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
+
+" Highlight em fucking tabs
+set list
+set listchars=tab:>-     " > is shown at the beginning, - throughout
