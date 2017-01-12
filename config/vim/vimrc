@@ -122,3 +122,9 @@ match ExtraWhitespace /\s\+$/
 " Highlight em fucking tabs
 set list
 set listchars=tab:>-     " > is shown at the beginning, - throughout
+
+" Autoload .vimrc while executing
+augroup myvimrchooks
+    au!
+    autocmd bufwritepost .vimrc source ~/.vimrc
+augroup END
