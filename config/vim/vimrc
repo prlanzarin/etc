@@ -116,7 +116,7 @@ set expandtab
 set number
 
 " Trailing spaces highlighting
-highlight ExtraWhitespace ctermbg=red guibg=red
+highlight ExtraWhitespace ctermbg=yellow guibg=yellow
 match ExtraWhitespace /\s\+$/
 
 " Highlight em fucking tabs
@@ -128,3 +128,18 @@ augroup myvimrchooks
     au!
     autocmd bufwritepost .vimrc source ~/.vimrc
 augroup END
+
+" smartcase: auto case-sensitive if there's any capital letters
+set smartcase
+
+" Search highlighting colors
+highlight Search ctermfg=White
+highlight Search ctermbg=Red
+
+" Additional (optional) highlighting
+"highlight Comment ctermbg=DarkGray
+"highlight Constant ctermbg=DarkBlue
+"highlight Normal ctermbg=Black
+"highlight NonText ctermbg=Black
+"highlight Special ctermbg=DarkMagenta
+"highlight Cursor ctermbg=Green
