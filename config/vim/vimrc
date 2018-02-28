@@ -1,5 +1,5 @@
 " pathogen
-execute pathogen#infect() 
+execute pathogen#infect()
 
 " When started as "evim", evim.vim will already have done these settings.
 if v:progname =~? "evim"
@@ -62,7 +62,7 @@ if has("autocmd")
 
     " For all text files set 'textwidth' to 78 characters.
     autocmd FileType text setlocal textwidth=80
-    " C LANGUAGE 
+    " C LANGUAGE
     autocmd FileType c setlocal ts=2 sw=2 expandtab
     autocmd FileType c setlocal textwidth=80
     autocmd FileType h setlocal ts=2 sw=2 expandtab
@@ -143,3 +143,10 @@ highlight Search ctermbg=Red
 "highlight NonText ctermbg=Black
 "highlight Special ctermbg=DarkMagenta
 "highlight Cursor ctermbg=Green
+
+" NERDTree bugged shit
+let NERDTreeDirArrowExpandable='+'
+let NERDTreeDirArrowCollapsible='~'
+
+" Autoremove trailing whitespaces because I'm fucking tired of this shit
+autocmd BufWritePre * %s/\s\+$//e
