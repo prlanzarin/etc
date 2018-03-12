@@ -69,6 +69,7 @@ if has("autocmd")
 
     " Javascript
     autocmd FileType js setlocal ts=2 sw=2 textwidth=80 expandtab
+    autocmd FileTYpe js BufWritePre * %s/\s\+$//e
 
     " NERDTree
     autocmd BufWinEnter * NERDTreeMirror
@@ -148,5 +149,4 @@ highlight Search ctermbg=Red
 let NERDTreeDirArrowExpandable='+'
 let NERDTreeDirArrowCollapsible='~'
 
-" Autoremove trailing whitespaces because I'm fucking tired of this shit
-autocmd BufWritePre * %s/\s\+$//e
+
